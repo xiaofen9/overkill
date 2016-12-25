@@ -2,7 +2,7 @@
 
 ##Intro
 This is a autoHotKey script for the online game OverWatch. It can auto-aim the adversaries when their HP bars appear.  To run the script, you should set your hero to default profile (i.e., default mouse sensitive) and switch your display to 1920x1080 seamless mode. 
-This script works well for soldier 76, tracer, Boston and repear.
+This script works well for soldier 76, tracer, Bastion and reaper.
 
 More directions are included in the script.
 
@@ -20,5 +20,5 @@ You should download the whole project, and run the script with those pics, becau
 
 Don't remember to fork me :}
 
-Do not use it for illegal propose. 
+Do not use it for illegal purpose. 
 
