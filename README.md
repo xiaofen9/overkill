@@ -1,4 +1,4 @@
-#overwatch bot aimming
+#Overkill aimming assitant
 
 ##Intro
 This is a autoHotKey script for the online game OverWatch. It can auto-aim the adversaries when their HP bars appear.  To run the script, you should set your hero to default profile (i.e., default mouse sensitive) and switch your display to 1920x1080 seamless mode. 
@@ -6,7 +6,8 @@ This script works well for soldier 76, tracer, Boston and repear.
 
 More directions are included in the script.
 
-##Update
+##History
+* V1.0: The first version of Overkill,congratulations!
 * V1.1: The searching scope of bars gets more accurate. Thus, HP bars searching is faster.
 
 ##Limitations
