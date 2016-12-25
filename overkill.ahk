@@ -52,12 +52,12 @@ Gui Add, Text, x220 y85 w110 h30, Pause/Resume [ALT]
 
 
 Gui Add, GroupBox, x10 y120 w160 h45, Aim Speed Control
-Gui Add, GroupBox, x10 y10 w160 h100, by f3i
+Gui Add, GroupBox, x10 y10 w160 h100, Intro
 Gui Add, Text, x20 y30 w65 h25, active when fire
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
-Gui Add, Edit, x80 y140 w50 h20 vrx, 4
+Gui Add, Edit, x80 y140 w50 h20 vrx, 1
 Gui Add, Button, x230 y210 w100 h20 gsub4, About Aim Speed
 Gui Add, Button, x240 y230 w80 h20 gsub1, Issue
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
@@ -76,7 +76,7 @@ Gui Add, Slider,x48 y200 w130 h25 vxrange Invert Tickinterval1 range1-4, 4
 Gui Add, Text, x16 y224 w35 h19, y-axis:
 Gui Add, Slider,x48 y224 w130 h25 vyrange Invert Tickinterval1 range1-4, 4
 Gui Add, Button, x240 y250 w80 h20 gsub2, How-to
-Gui Add, Button, x240 y270 w80 h20 gsub3, Best Settings
+Gui Add, Button, x240 y270 w80 h20 gsub3, Best
 Gui Add, GroupBox, x8 y176 w185 h80, Range
 Gui Add, Edit, x315 y140 w30 h20 vxy, 85
 Gui Add, Text, x280 y140 w35 h20, y-axis:
@@ -84,9 +84,9 @@ Gui Add, Text, x208 y140 w35 h20, x-axis:
 Gui Add, Edit, x240 y140 w35 h20 vxa, 58
 Gui Add, GroupBox, x205 y120 w160 h45, Aim Settings
 Gui Add, Button, x230 y170 w100 h20 gsub5, About Range
-Gui Add, Button, x230 y190 w100 h20 gsub6, About Aim Settings
-Gui Add, Text, x220 y300 w130 h150, Modified by: f3i`n`nThe software is just for fun`n`nYou should only use it for legal propose`n`n
-Gui Show, w372 h480, f3i auto aiming
+Gui Add, Button, x230 y190 w100 h20 gsub6, About Aim
+Gui Add, Text, x220 y300 w130 h150, `n`nThe software is just for fun`n`nYou should only use it for legal propose`n`n
+Gui Show, w372 h480, Overkill
 Loop {
 Gui, Submit, NoHide
 Sleep -1
@@ -149,7 +149,7 @@ Return
 Return
 sub1:
 {
-msgbox, Having issues?`n`nMccree Right Click No Recoil Does NOT!!! work with right click aimlock`nHOLD DOWN RIGHT CLICK FOR IT TO WORK DONT JUST PRESS BUTTON`n`nAll Combos are middle mouse button`n`nCheat is CPU intensive and only uses math.`n`nLowFPS: Lower Aim speed to 3.`nLowFPS: Lower resolution to 720p and play on low.`nLowFPS: If you get low fps after a playthrough, press F3 to restart the cheat.`n`nCursor jumping left or right when using Aim key?`n`nJumpBug:Your PC is lagging out when using Aimkey. Check LowFPS solution.`nJumpBug: Switch your resolution to 720p but use F2(1080p) with Aim Speed 3.`n`nAlways try the cheat out in Practice Range to find your best settings.
+msgbox, Having issues?`n`nMccree Right Click No Recoil Does NOT!!! work with right click aimlock`nHOLD DOWN RIGHT CLICK FOR IT TO WORK DONT JUST PRESS BUTTON`n`nAll Combos are middle mouse button`n`nCheat is CPU intensive and only uses math.`n`nLowFPS: Lower Aim speed to 1.`nLowFPS: Lower resolution to 720p and play on low.`nLowFPS: If you get low fps after a playthrough, press F3 to restart the cheat.`n`nCursor jumping left or right when using Aim key?`n`nJumpBug:Your PC is lagging out when using Aimkey. Check LowFPS solution.`nJumpBug: Switch your resolution to 720p but use F2(1080p) with Aim Speed 1.`n`nAlways try the cheat out in Practice Range to find your best settings.
 }
 return
 sub2:
@@ -159,7 +159,7 @@ msgbox, How-to:`n`nLaunch Game. Switch to Borderless Windowed mode.`nResolution 
 return
 sub3:
 {
-msgbox, Best Settings for the cheat (Legit):`n`nResolution: 1280x720`nAim Speed: 3
+msgbox, Best Settings for the cheat (Legit):`n`nResolution: 1920x1080`nAim Speed: 1
 }
 return
 sub4:
@@ -219,6 +219,16 @@ ScanL := 660
 ScanR := 1250
 ScanT := 280
 ScanB := 610
+LargeX1 := 0 + (A_Screenwidth * (xrange/10))
+LargeY1 := 0 + (A_Screenheight * (yrange/10))
+LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
+LargeY2 := A_Screenheight - (A_Screenheight * (yrange / 10))
+SmallX1 := LargeX1 + 40
+SmallY1 := LargeY1
+SmallX2 := LargeX2 - 70
+SmallY2 := LargeY2 - 100
+
+FoundFlag :=false
 GuiControlget, rX
 GuiControlget, xa
 GuiControlget, ya
@@ -228,12 +238,31 @@ Loop, {
 Gui,Submit, Nohide
 
 GetKeyState, Mouse2, LButton, P
-If ( Mouse2 == "D" ) {
-imageSearch, AimPixelX, AimPixelY, 0 + (A_Screenwidth * (xrange/10)), 0 + (A_Screenheight * (yrange/10)), A_Screenwidth - (A_Screenwidth * (xrange/10)), A_Screenheight - (A_Screenheight * (yrange / 10)),  *4 hhp.bmp
+if ( Mouse2 == "D" ) {
+	if ( not FoundFlag ) {
+		imageSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, *4 hhp.bmp
+		if ErrorLevel = 1  
+			FoundFlag:=false
+		else 
+			FoundFlag := true
+	}
+	else {
+		imageSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2,  *4 hhp.bmp
+		if ErrorLevel = 1
+			FoundFlag := false		
+	}
+
+
 GoSub GetAimOffset2
 GoSub GetAimMoves1
 GoSub MouseMoves2
+
 }
+
+
+
+
+
 
 
 
@@ -270,8 +299,8 @@ DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 
 GetAimOffset2:
 Gui,Submit, Nohide
-AimX := AimPixelX - ZeroX +40
-AimY := AimPixelY - ZeroY +65
+AimX := AimPixelX - ZeroX +42
+AimY := AimPixelY - ZeroY +90
 If ( AimX+4 > 0) {
 DirX := rx / 10
 }
