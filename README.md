@@ -2,23 +2,25 @@
 
 ##Intro
 This is a autoHotKey script for the online game OverWatch. It can auto-aim the adversaries when their HP bars appear.  To run the script, you should set your hero to default profile (i.e., default mouse sensitive) and switch your display to 1920x1080 seamless mode. 
-This script works well for soldier 76, tracer, Bastion and reaper.
+This script works well for Soldier 76, Tracer, Bastion and Reaper.
+
+Note that the default parameter rx in Aim Speed Control is 4, which denotes the moving speed of your mouse. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.
 
 More directions are included in the script.
 
 ##History
-* V1.0: The first version of Overkill,congratulations!
+* V1.2: Using pixel-level search, hence HP bar searching is faster and more accurate! Thank Ding for his contribution!
 * V1.1: The searching scope of bars gets more accurate. Thus, HP bars searching is faster.
+* V1.0: The first version of Overkill,congratulations!
 
-##Limitations
-This script is still not very stable for mutiple adversaries in the detection scale, so ...
 
-This script can't support different weapons very well , so...
+##Call For Contribution
+This script can't support different heros very well (e.g., Macree, Pharah, Widowmaker). You can contribute your aimming solution to be a part of this project. 
 
 ##Attention
-You should download the whole project, and run the script with those pics, because the script detects HP bars using these local pics.
+Don't remember to star me. :）
 
-Don't remember to fork me :}
+If there is any bug, you can submit an issue to inform me.
 
-Do not use it for illegal purpose. 
+
 

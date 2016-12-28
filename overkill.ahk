@@ -57,7 +57,7 @@ Gui Add, Text, x20 y30 w65 h25, active when fire
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
-Gui Add, Edit, x80 y140 w50 h20 vrx, 1
+Gui Add, Edit, x80 y140 w50 h20 vrx, 4
 Gui Add, Button, x230 y210 w100 h20 gsub4, About Aim Speed
 Gui Add, Button, x240 y230 w80 h20 gsub1, Issue
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
@@ -220,13 +220,13 @@ ScanR := 1250
 ScanT := 280
 ScanB := 610
 LargeX1 := 0 + (A_Screenwidth * (xrange/10))
-LargeY1 := 0 + (A_Screenheight * (yrange/10))
+LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
 LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
-LargeY2 := A_Screenheight - (A_Screenheight * (yrange / 10))
-SmallX1 := LargeX1 + 40
-SmallY1 := LargeY1
-SmallX2 := LargeX2 - 70
-SmallY2 := LargeY2 - 100
+LargeY2 := A_Screenheight - (A_Screenheight * (yrange / 10))-75
+SmallX1 := LargeX1 + 60
+SmallY1 := LargeY1 
+SmallX2 := LargeX2 - 60
+SmallY2 := LargeY2 - 55
 
 FoundFlag :=false
 GuiControlget, rX
@@ -234,24 +234,20 @@ GuiControlget, xa
 GuiControlget, ya
 GuiControlget, xrange
 GuiControlget, yrange
+;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
+EMCol := 0xFF0013
+ColVn := 5
+
+if(overlayActive=1){
+Box_Init("FF0000")
+Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
+}
 Loop, {
 Gui,Submit, Nohide
 
+GoSub SearchBot
 GetKeyState, Mouse2, LButton, P
 if ( Mouse2 == "D" ) {
-	if ( not FoundFlag ) {
-		imageSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, *4 hhp.bmp
-		if ErrorLevel = 1  
-			FoundFlag:=false
-		else 
-			FoundFlag := true
-	}
-	else {
-		imageSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2,  *4 hhp.bmp
-		if ErrorLevel = 1
-			FoundFlag := false		
-	}
-
 
 GoSub GetAimOffset2
 GoSub GetAimMoves1
@@ -268,15 +264,6 @@ GoSub MouseMoves2
 
 
 
-Box_Init("FF0000")
-X := 0 + (A_Screenwidth * (xrange/10))
-Y := 0 + (A_Screenheight * (yrange/10))
-W := (A_Screenwidth - (A_Screenwidth * (xrange/10))) - X
-H := (A_Screenheight - (A_Screenheight * (yrange / 10))) -Y
-Box_Draw(X, Y , W, H)
-if(overlayActive=0){
-Box_Hide()
-}
 }
 
 
@@ -325,6 +312,22 @@ RootY := Ceil(AimOffsetY)
 MoveX := RootX * DirX
 MoveY := RootY * DirY
 ;GoSub DebugTool1
+Return
+
+
+SearchBot:
+if ( not FoundFlag ) {
+	PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
+	if ErrorLevel = 1  
+		FoundFlag := false
+	else 
+		FoundFlag := true
+}
+else {
+	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
+	if ErrorLevel = 1
+		FoundFlag := false		
+}
 Return
 
 reload:
