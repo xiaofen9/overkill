@@ -236,7 +236,7 @@ GuiControlget, xrange
 GuiControlget, yrange
 ;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
 EMCol := 0xFF0013
-ColVn := 5
+ColVn := 2
 
 if(overlayActive=1){
 Box_Init("FF0000")
@@ -289,7 +289,7 @@ Gui,Submit, Nohide
 AimX := AimPixelX - ZeroX +42
 AimY := AimPixelY - ZeroY +90
 If ( AimX+4 > 0) {
-DirX := rx / 10
+DirX := rx / 8
 }
 If ( AimX+4 < 0) {
 DirX := (-rx) / 10
