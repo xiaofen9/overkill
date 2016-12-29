@@ -57,7 +57,7 @@ Gui Add, Text, x20 y30 w65 h25, active when fire
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
-Gui Add, Edit, x80 y140 w50 h20 vrx, 4
+Gui Add, Edit, x80 y140 w50 h20 vrx, 5
 Gui Add, Button, x230 y210 w100 h20 gsub4, About Aim Speed
 Gui Add, Button, x240 y230 w80 h20 gsub1, Issue
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
@@ -66,6 +66,8 @@ Gui Add, CheckBox, x16 y288 w160 h20 voverlayActive, Overlay
 ;Gui Add, CheckBox, x16 y308 w160 h20 vtorbjorn, Torbjorn Fast Reload
 ;Gui Add, CheckBox, x16 y328 w160 h20 vpharah, Pharah Fast Reload
 Gui Add, CheckBox, x16 y328 w160 h20 vreaper, Reaper Fast Reload
+Gui Add, Text, x16 y428 w160 h20, LtoRaddendOffset:
+Gui Add, Edit, x16 y448 w160 h20 vLtoRaddendOffset, 1.2
 ;Gui Add, CheckBox, x16 y368 w160 h20 vroadhog, RoadHog Fast Reload
 ;Gui Add, CheckBox, x16 y388 w160 h20 vroadhog1, RoadHog Combo
 ;Gui Add, CheckBox, x16 y408 w160 h20 vgenji, Genji combo
@@ -198,9 +200,9 @@ LargeX1 := 0 + (A_Screenwidth * (xrange/10))
 LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
 LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
 LargeY2 := A_Screenheight - (A_Screenheight * (yrange / 10))-75
-SmallX1 := LargeX1 + 60
+SmallX1 := LargeX1 + 40
 SmallY1 := LargeY1 
-SmallX2 := LargeX2 - 60
+SmallX2 := LargeX2 - 40
 SmallY2 := LargeY2 - 55
 
 ;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
@@ -248,16 +250,16 @@ Gui,Submit, Nohide
 AimX := AimPixelX - ZeroX +30
 AimY := AimPixelY - ZeroY +50
 If ( AimX+5 > 0) {
-DirX := rx / 8
+DirX := rx / 10
 }
 If ( AimX+5 < 0) {
 DirX := (-rx) / 10
 }
 If ( AimY+2 > 0 ) {
-DirY := rX /10 *0.5
+DirY := rX /10
 }
 If ( AimY+2 < 0 ) {
-DirY := (-rx) /10 *0.5
+DirY := (-rx) /10
 }
 AimOffsetX := AimX * DirX
 AimOffsetY := AimY * DirY
@@ -361,10 +363,6 @@ GoSub GetAimMoves1
 GoSub MouseMoves1
 
 }
-
-
-
-
 }
 
 
@@ -393,6 +391,7 @@ if ( not FoundFlag ) {
 }
 else {
 	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
+	;PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
 	if ErrorLevel = 1
 		FoundFlag := false		
 }
@@ -402,19 +401,21 @@ Return
 
 GetAimOffset1:
 Gui,Submit, Nohide
+moveToRight := 0
 AimX := AimPixelX - ZeroX +42
 AimY := AimPixelY - ZeroY +90
 If ( AimX+4 > 0) {
-DirX := rx / 8.5
+DirX := rx / 10
+moveToRight := 1
 }
 If ( AimX+4 < 0) {
 DirX := (-rx) / 10
 }
 If ( AimY+2 > 0 ) {
-DirY := rX /10 *0.55
+DirY := rX /10 
 }
 If ( AimY+2 < 0 ) {
-DirY := (-rx) /10 *0.5
+DirY := (-rx) /10 
 }
 AimOffsetX := AimX * DirX
 AimOffsetY := AimY * DirY
@@ -425,7 +426,16 @@ GetAimMoves1:
 ;RootY := Ceil(AimOffsetY)
 RootX := AimOffsetX
 RootY := AimOffsetY
-MoveX := RootX * DirX
+if (moveToRight)
+{
+	MoveX := RootX * DirX + LtoRaddendOffset ;tested with 15 sensitivity, the addend should be larger than 1.3 when sensitivity is smaller than 15
+	;MoveX := RootX * (DirX + 0.5) 
+}
+else
+{
+	MoveX := RootX * DirX
+}
+;MoveX := RootX * DirX
 MoveY := RootY * DirY
 ;GoSub DebugTool1
 Return
