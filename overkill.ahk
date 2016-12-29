@@ -92,30 +92,7 @@ Gui, Submit, NoHide
 Sleep -1
 }
 Return
-TrigerSub:
-GuiControlGet, trigger
-if trigger
-setbatchlines,-1
-dir := "1.png"
-if (!fileexist(dir)) {
-URLDownloadToFile,http://i.imgur.com/wrQBaYL.png, % dir
-while (!fileexist(dir))
-sleep, 50
-}
-wingetpos,,,ww,wh, % "ahk_class TankWindowClass"
-center_x := ww/2
-center_y := wh/2
-loop {
-ImageSearch, , , % center_x, 0, % center_x, % center_y, % "*80 " dir
-If (!Errorlevel) {
-ImageSearch, , , % center_x, % center_y, % center_x, % wh, % "*80 " dir
-If (!Errorlevel)
-Send {Click down}
-Sleep,225
-Send {Click up}
-Sleep,20
-}}
-Return
+
 F4::
 Send {Ctrl Down}{Shift Down}{R Down}{Ctrl Up}{Shift Up}{R Up}
 Return
@@ -135,18 +112,7 @@ Return
 Return
 Return
 
-mouseXY(x,y)
-{
-DllCall("mouse_event",int,1,int,x,int,y,uint,0,uint,0)
-}
-#If
-return
-#If aimtype2=1
-~capslock::
-GoSub MouseMoves2
-Return
-#If
-Return
+
 sub1:
 {
 msgbox, Having issues?`n`nMccree Right Click No Recoil Does NOT!!! work with right click aimlock`nHOLD DOWN RIGHT CLICK FOR IT TO WORK DONT JUST PRESS BUTTON`n`nAll Combos are middle mouse button`n`nCheat is CPU intensive and only uses math.`n`nLowFPS: Lower Aim speed to 1.`nLowFPS: Lower resolution to 720p and play on low.`nLowFPS: If you get low fps after a playthrough, press F3 to restart the cheat.`n`nCursor jumping left or right when using Aim key?`n`nJumpBug:Your PC is lagging out when using Aimkey. Check LowFPS solution.`nJumpBug: Switch your resolution to 720p but use F2(1080p) with Aim Speed 1.`n`nAlways try the cheat out in Practice Range to find your best settings.
@@ -392,7 +358,7 @@ if ( Mouse2 == "D" ) {
 
 GoSub GetAimOffset1
 GoSub GetAimMoves1
-GoSub MouseMoves2
+GoSub MouseMoves1
 
 }
 
@@ -439,13 +405,13 @@ Gui,Submit, Nohide
 AimX := AimPixelX - ZeroX +42
 AimY := AimPixelY - ZeroY +90
 If ( AimX+4 > 0) {
-DirX := rx / 8
+DirX := rx / 8.5
 }
 If ( AimX+4 < 0) {
 DirX := (-rx) / 10
 }
 If ( AimY+2 > 0 ) {
-DirY := rX /10 *0.5
+DirY := rX /10 *0.55
 }
 If ( AimY+2 < 0 ) {
 DirY := (-rx) /10 *0.5
