@@ -220,6 +220,14 @@ ScanR := 800
 ScanT := 180
 ScanB := 400
 
+;UI parameters
+GuiControlget, rX
+GuiControlget, xa
+GuiControlget, ya
+GuiControlget, xrange
+GuiControlget, yrange
+
+;detection box
 LargeX1 := 0 + (A_Screenwidth * (xrange/10))
 LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
 LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
@@ -229,15 +237,10 @@ SmallY1 := LargeY1
 SmallX2 := LargeX2 - 60
 SmallY2 := LargeY2 - 55
 
-FoundFlag :=false
-GuiControlget, rX
-GuiControlget, xa
-GuiControlget, ya
-GuiControlget, xrange
-GuiControlget, yrange
 ;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
 EMCol := 0xFF0013
 ColVn := 2
+FoundFlag :=false
 
 if(overlayActive=1){
 Box_Init("FF0000")
@@ -351,6 +354,15 @@ ScanL := 660
 ScanR := 1250
 ScanT := 280
 ScanB := 610
+
+;UI parameters
+GuiControlget, rX
+GuiControlget, xa
+GuiControlget, ya
+GuiControlget, xrange
+GuiControlget, yrange
+
+;detection box
 LargeX1 := 0 + (A_Screenwidth * (xrange/10))
 LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
 LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
@@ -360,15 +372,11 @@ SmallY1 := LargeY1
 SmallX2 := LargeX2 - 60
 SmallY2 := LargeY2 - 55
 
-FoundFlag :=false
-GuiControlget, rX
-GuiControlget, xa
-GuiControlget, ya
-GuiControlget, xrange
-GuiControlget, yrange
+
 ;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
 EMCol := 0xFF0013
-ColVn := 2
+ColVn := 1
+FoundFlag :=false
 
 if(overlayActive=1){
 Box_Init("FF0000")
