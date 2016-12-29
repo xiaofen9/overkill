@@ -1,13 +1,5 @@
-; <COMPILER: v1.1.24.01>
-Box_Init(C="FF0000") {
-Gui, 96: -Caption +ToolWindow +E0x20
-Gui, 96: Color, % C
-Gui, 97: -Caption +ToolWindow +E0x20
-Gui, 97: Color, % C
-Gui, 98: -Caption +ToolWindow +E0x20
-Gui, 98: Color, % C
-Gui, 99: -Caption +ToolWindow +E0x20
-Gui, 99: Color, % C
+testhahahhahahahha
+
 }
 Box_Draw(X, Y, W, H, T="1", O="I") {
 If(W < 0)
