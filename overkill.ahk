@@ -45,21 +45,20 @@ guif:
 #SingleInstance force
 SkinForm(Apply, A_ScriptDir . "\USkin.dll", A_ScriptDir . "\Milikymac.msstyles")
 Firing := 0
-Gui Add, Text, x220 y25 w130 h30, Run 1920x1080 Mode [F2]
-Gui Add, Text, x220 y45 w110 h30, Restart Program [F3]
-Gui Add, Text, x220 y65 w160 h30, Performance Statistics [F4]
+Gui Add, Text, x220 y25 w130 h30, 1280x720 Mode [F1]
+Gui Add, Text, x220 y45 w110 h30, 1920x1080 Mode [F2]
+Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
 Gui Add, Text, x220 y85 w110 h30, Pause/Resume [ALT]
 
 
-Gui Add, GroupBox, x10 y120 w160 h45, Aim Speed Control
+Gui Add, GroupBox, x10 y120 w160 h45, Speed
 Gui Add, GroupBox, x10 y10 w160 h100, Intro
 Gui Add, Text, x20 y30 w65 h25, active when fire
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
 Gui Add, Edit, x80 y140 w50 h20 vrx, 5
-Gui Add, Button, x230 y210 w100 h20 gsub4, About Aim Speed
-Gui Add, Button, x240 y230 w80 h20 gsub1, Issue
+Gui Add, Button, x230 y210 w100 h20 gsub1, How-to
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
 Gui Add, CheckBox, x16 y288 w160 h20 voverlayActive, Overlay
 ;Gui Add, CheckBox, x16 y288 w160 h20 vmccree, Mccree Right Click No Recoil
@@ -72,21 +71,15 @@ Gui Add, Edit, x16 y448 w160 h20 vLtoRaddendOffset, 1.2
 ;Gui Add, CheckBox, x16 y388 w160 h20 vroadhog1, RoadHog Combo
 ;Gui Add, CheckBox, x16 y408 w160 h20 vgenji, Genji combo
 ;Gui Add, CheckBox, x16 y288 w160 h20 vbunny, Bunnyhop
-
 Gui Add, Text, x16 y200 w33 h20, x-axis:
 Gui Add, Slider,x48 y200 w130 h25 vxrange Invert Tickinterval1 range1-4, 4
 Gui Add, Text, x16 y224 w35 h19, y-axis:
 Gui Add, Slider,x48 y224 w130 h25 vyrange Invert Tickinterval1 range1-4, 4
-Gui Add, Button, x240 y250 w80 h20 gsub2, How-to
-Gui Add, Button, x240 y270 w80 h20 gsub3, Best
-Gui Add, GroupBox, x8 y176 w185 h80, Range
 Gui Add, Edit, x315 y140 w30 h20 vya, 0
-Gui Add, Text, x280 y140 w35 h20, y-axis:
-Gui Add, Text, x208 y140 w35 h20, x-axis:
+Gui Add, Text, x280 y140 w35 h20, Y:
+Gui Add, Text, x208 y140 w35 h20, X:
 Gui Add, Edit, x240 y140 w35 h20 vxa, 0
-Gui Add, GroupBox, x205 y120 w160 h45, Aim Settings
-Gui Add, Button, x230 y170 w100 h20 gsub5, About Range
-Gui Add, Button, x230 y190 w100 h20 gsub6, About Aim
+Gui Add, GroupBox, x205 y120 w160 h45, Shoot 
 Gui Add, Text, x220 y300 w130 h150, `n`nThe software is just for fun`n`nYou should only use it for legal propose`n`n
 Gui Show, w372 h480, Overkill
 Loop {
@@ -117,34 +110,10 @@ Return
 
 sub1:
 {
-msgbox, Having issues?`n`nMccree Right Click No Recoil Does NOT!!! work with right click aimlock`nHOLD DOWN RIGHT CLICK FOR IT TO WORK DONT JUST PRESS BUTTON`n`nAll Combos are middle mouse button`n`nCheat is CPU intensive and only uses math.`n`nLowFPS: Lower Aim speed to 1.`nLowFPS: Lower resolution to 720p and play on low.`nLowFPS: If you get low fps after a playthrough, press F3 to restart the cheat.`n`nCursor jumping left or right when using Aim key?`n`nJumpBug:Your PC is lagging out when using Aimkey. Check LowFPS solution.`nJumpBug: Switch your resolution to 720p but use F2(1080p) with Aim Speed 1.`n`nAlways try the cheat out in Practice Range to find your best settings.
+msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nResolution has to be 720p or 1080p. As precaution, set your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your resolution.`nShoot an Enemy. When the Health Bar is visible, overkill will start to auto-aimming.`n`n Speed: represent the moving speed of auto-aimming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
 }
 return
-sub2:
-{
-msgbox, How-to:`n`nLaunch Game. Switch to Borderless Windowed mode.`nResolution has to be 720p or 1080p. As precaution, set your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your resolution.`nShoot an Enemy. When the Health Bar is visible press the aimkey to snap onto the target.`n`nIf nothing is happening make sure you are not using any desktop applications that alter your color settings or are recording your gameplay such as W10 DVR or Fraps.
-}
-return
-sub3:
-{
-msgbox, Best Settings for the cheat (Legit):`n`nResolution: 1920x1080`nAim Speed: 1
-}
-return
-sub4:
-{
-msgbox, Higher the number, Faster the it locks on. `n`Lower the number, The slower it locks on.
-}
-return
-sub5:
-{
-msgbox, Has 4 settings. `n`nStarts on its Lowest FoV. `n`nThe higher the fov the more the bot can see. `n`nX-Axis is side ways Y-Axis is up and down
-}
-return
-sub6:
-{
-msgbox, This is where it aims. `n`nThe default settings is what is in all my previous verions. `n`nAs always X-Axis is side ways Y-Axis is up and down
-}
-return
+
 GuiClose:
 ExitApp
 return
