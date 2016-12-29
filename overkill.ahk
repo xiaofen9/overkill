@@ -192,6 +192,138 @@ MsgBox,  Applied
 Gui,Submit, Nohide
 return
 
+F1::
+#Persistent
+#KeyHistory, 0
+#NoEnv
+#HotKeyInterval 1
+#MaxHotkeysPerInterval 127
+#InstallKeybdHook
+#UseHook
+#SingleInstance, Force
+SetKeyDelay,-1, 8
+SetControlDelay, -1
+SetMouseDelay, 0
+SetWinDelay,-1
+SendMode, InputThenPlay
+SetBatchLines,-1
+ListLines, Off
+CoordMode, Mouse, Screen
+PID := DllCall("GetCurrentProcessId")
+Process, Priority, %PID%, Normal
+ZeroX := 640
+ZeroY := 360
+CFovX := 320
+CFovY := 200
+ScanL := 500
+ScanR := 800
+ScanT := 180
+ScanB := 400
+
+LargeX1 := 0 + (A_Screenwidth * (xrange/10))
+LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
+LargeX2 := A_Screenwidth - (A_Screenwidth * (xrange/10))
+LargeY2 := A_Screenheight - (A_Screenheight * (yrange / 10))-75
+SmallX1 := LargeX1 + 60
+SmallY1 := LargeY1 
+SmallX2 := LargeX2 - 60
+SmallY2 := LargeY2 - 55
+
+FoundFlag :=false
+GuiControlget, rX
+GuiControlget, xa
+GuiControlget, ya
+GuiControlget, xrange
+GuiControlget, yrange
+;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
+EMCol := 0xFF0013
+ColVn := 2
+
+if(overlayActive=1){
+Box_Init("FF0000")
+Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
+}
+
+Loop, {
+Gui,Submit, Nohide
+
+GoSub SearchBot
+GetKeyState, Mouse2, LButton, P
+if ( Mouse2 == "D" ) {
+
+GoSub GetAimOffset
+GoSub GetAimMoves
+GoSub MouseMoves
+
+}
+
+
+
+
+}
+
+MouseMoves:
+If ( Mouse2 == "D" ) {
+DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
+}
+Return
+
+;MouseMoves1:
+;If ( Mouse2 == "U" ) {
+;DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
+;}
+;Return
+
+GetAimOffset:
+Gui,Submit, Nohide
+AimX := AimPixelX - ZeroX +30
+AimY := AimPixelY - ZeroY +50
+If ( AimX+5 > 0) {
+DirX := rx / 8
+}
+If ( AimX+5 < 0) {
+DirX := (-rx) / 10
+}
+If ( AimY+2 > 0 ) {
+DirY := rX /10 *0.5
+}
+If ( AimY+2 < 0 ) {
+DirY := (-rx) /10 *0.5
+}
+AimOffsetX := AimX * DirX
+AimOffsetY := AimY * DirY
+Return
+
+
+
+GetAimMoves:
+RootX :=  AimOffsetX 
+RootY :=  AimOffsetY 
+MoveX := RootX * DirX
+MoveY := RootY * DirY
+Return
+
+SleepF:
+SleepDuration = 1
+TimePeriod = 1
+DllCall("Winmm\timeBeginPeriod", uint, TimePeriod)
+Iterations = 1
+StartTime := A_TickCount
+Loop, %Iterations% {
+DllCall("Sleep", UInt, TimePeriod)
+}
+DllCall("Winmm\timeEndPeriod", UInt, TimePeriod)
+Return
+
+DebugTool:
+MouseGetPos, MX, MY
+ToolTip, %AimOffsetX% | %AimOffsetY%
+ToolTip, %AimX% | %AimY%
+ToolTip, %IntAimX% | %IntAimY%
+ToolTip, %RootX% | %RootY%
+ToolTip, %MoveX% | %MoveY% || %MX% %MY%
+Return
+
 F2::
 #Persistent
 #KeyHistory, 0
@@ -242,6 +374,7 @@ if(overlayActive=1){
 Box_Init("FF0000")
 Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
 }
+
 Loop, {
 Gui,Submit, Nohide
 
@@ -249,7 +382,7 @@ GoSub SearchBot
 GetKeyState, Mouse2, LButton, P
 if ( Mouse2 == "D" ) {
 
-GoSub GetAimOffset2
+GoSub GetAimOffset1
 GoSub GetAimMoves1
 GoSub MouseMoves2
 
@@ -258,12 +391,6 @@ GoSub MouseMoves2
 
 
 
-
-
-
-
-
-
 }
 
 
@@ -271,7 +398,7 @@ GoSub MouseMoves2
 
 
 
-MouseMoves2:
+MouseMoves1:
 DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 Return
 
@@ -282,9 +409,24 @@ DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 
 
 
+SearchBot:
+if ( not FoundFlag ) {
+	PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
+	if ErrorLevel = 1  
+		FoundFlag := false
+	else 
+		FoundFlag := true
+}
+else {
+	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
+	if ErrorLevel = 1
+		FoundFlag := false		
+}
+Return
 
 
-GetAimOffset2:
+
+GetAimOffset1:
 Gui,Submit, Nohide
 AimX := AimPixelX - ZeroX +42
 AimY := AimPixelY - ZeroY +90
@@ -305,30 +447,17 @@ AimOffsetY := AimY * DirY
 Return
 
 GetAimMoves1:
-RootX := Ceil(AimOffsetX)
-RootY := Ceil(AimOffsetY)
-;RootX := AimOffsetX
-;RootY := AimOffsetY
+;RootX := Ceil(AimOffsetX)
+;RootY := Ceil(AimOffsetY)
+RootX := AimOffsetX
+RootY := AimOffsetY
 MoveX := RootX * DirX
 MoveY := RootY * DirY
 ;GoSub DebugTool1
 Return
 
 
-SearchBot:
-if ( not FoundFlag ) {
-	PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
-	if ErrorLevel = 1  
-		FoundFlag := false
-	else 
-		FoundFlag := true
-}
-else {
-	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
-	if ErrorLevel = 1
-		FoundFlag := false		
-}
-Return
+
 
 reload:
 SleepF1:
