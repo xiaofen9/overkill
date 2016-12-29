@@ -80,10 +80,10 @@ Gui Add, Slider,x48 y224 w130 h25 vyrange Invert Tickinterval1 range1-4, 4
 Gui Add, Button, x240 y250 w80 h20 gsub2, How-to
 Gui Add, Button, x240 y270 w80 h20 gsub3, Best
 Gui Add, GroupBox, x8 y176 w185 h80, Range
-Gui Add, Edit, x315 y140 w30 h20 vxy, 85
+Gui Add, Edit, x315 y140 w30 h20 vya, 0
 Gui Add, Text, x280 y140 w35 h20, y-axis:
 Gui Add, Text, x208 y140 w35 h20, x-axis:
-Gui Add, Edit, x240 y140 w35 h20 vxa, 58
+Gui Add, Edit, x240 y140 w35 h20 vxa, 0
 Gui Add, GroupBox, x205 y120 w160 h45, Aim Settings
 Gui Add, Button, x230 y170 w100 h20 gsub5, About Range
 Gui Add, Button, x230 y190 w100 h20 gsub6, About Aim
@@ -247,8 +247,8 @@ Return
 
 GetAimOffset:
 Gui,Submit, Nohide
-AimX := AimPixelX - ZeroX +30
-AimY := AimPixelY - ZeroY +50
+AimX := AimPixelX - ZeroX +1+ xa
+AimY := AimPixelY - ZeroY +19+ya
 If ( AimX+5 > 0) {
 DirX := rx / 10
 }
@@ -402,8 +402,8 @@ Return
 GetAimOffset1:
 Gui,Submit, Nohide
 moveToRight := 0
-AimX := AimPixelX - ZeroX +42
-AimY := AimPixelY - ZeroY +90
+AimX := AimPixelX - ZeroX + 42+xa
+AimY := AimPixelY - ZeroY + 90+ya
 If ( AimX+4 > 0) {
 DirX := rx / 10
 moveToRight := 1
