@@ -216,8 +216,8 @@ Return
 
 GetAimOffset:
 Gui,Submit, Nohide
-AimX := AimPixelX - ZeroX +1+ xa
-AimY := AimPixelY - ZeroY +19+ya
+AimX := AimPixelX - ZeroX +1+  xa
+AimY := AimPixelY - ZeroY +19+ ya*5
 If ( AimX+5 > 0) {
 DirX := rx / 10
 }
@@ -371,8 +371,8 @@ Return
 GetAimOffset1:
 Gui,Submit, Nohide
 moveToRight := 0
-AimX := AimPixelX - ZeroX + 42+xa
-AimY := AimPixelY - ZeroY + 90+ya
+AimX := AimPixelX - ZeroX + 42+xa*5
+AimY := AimPixelY - ZeroY + 90+ya*5
 If ( AimX+4 > 0) {
 DirX := rx / 10
 moveToRight := 1
