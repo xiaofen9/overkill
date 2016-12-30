@@ -45,6 +45,7 @@ guif:
 #SingleInstance force
 SkinForm(Apply, A_ScriptDir . "\USkin.dll", A_ScriptDir . "\Milikymac.msstyles")
 Firing := 0
+msgbox, To get the lastest version, visit https://github.com/xiaofen9/overwatch
 Gui Add, Text, x220 y25 w130 h30, 1280x720 Mode [F1]
 Gui Add, Text, x220 y45 w110 h30, 1920x1080 Mode [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
@@ -52,13 +53,15 @@ Gui Add, Text, x220 y85 w110 h30, Pause/Resume [ALT]
 
 
 Gui Add, GroupBox, x10 y120 w160 h45, Speed
-Gui Add, GroupBox, x10 y10 w160 h100, Intro
-Gui Add, Text, x20 y30 w65 h25, active when fire
+Gui Add, GroupBox, x10 y10 w180 h100, Intro
+Gui Add, Text, x20 y30 w165 h25, Overkill aimming assitant
+Gui Add, Text, x20 y55 w165 h25, Active when fire
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
 Gui Add, Edit, x80 y140 w50 h20 vrx, 5
 Gui Add, Button, x230 y210 w100 h20 gsub1, How-to
+Gui Add, Button, x230 y240 w100 h20 gsub2, Get lastest ver
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
 Gui Add, CheckBox, x16 y288 w160 h20 voverlayActive, Overlay
 ;Gui Add, CheckBox, x16 y288 w160 h20 vmccree, Mccree Right Click No Recoil
@@ -113,6 +116,11 @@ sub1:
 msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nResolution has to be 720p or 1080p. As precaution, set your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your resolution.`nShoot an Enemy. When the Health Bar is visible, overkill will start to auto-aimming.`n`n Speed: represent the moving speed of auto-aimming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
 }
 return
+
+sub2:
+{
+Run, https://github.com/xiaofen9/overwatch
+}
 
 GuiClose:
 ExitApp
