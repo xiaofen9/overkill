@@ -158,7 +158,7 @@ ScanT := 180
 ScanB := 400
 
 ;UI parameters
-GuiControlget, rX
+GuiControlget, rx
 GuiControlget, xa
 GuiControlget, ya
 GuiControlget, xrange
@@ -216,8 +216,10 @@ Return
 
 GetAimOffset:
 Gui,Submit, Nohide
-AimX := AimPixelX - ZeroX +1+  xa
-AimY := AimPixelY - ZeroY +19+ ya*5
+headX :=1+xa
+headY := 19+ya*5
+AimX := AimPixelX - ZeroX +headX
+AimY := AimPixelY - ZeroY +headY
 If ( AimX+5 > 0) {
 DirX := rx / 10
 }
@@ -225,7 +227,7 @@ If ( AimX+5 < 0) {
 DirX := (-rx) / 10
 }
 If ( AimY+2 > 0 ) {
-DirY := rX /10
+DirY := rx /10
 }
 If ( AimY+2 < 0 ) {
 DirY := (-rx) /10
@@ -371,8 +373,10 @@ Return
 GetAimOffset1:
 Gui,Submit, Nohide
 moveToRight := 0
-AimX := AimPixelX - ZeroX + 42+xa*5
-AimY := AimPixelY - ZeroY + 90+ya*5
+headX := 42+xa*3
+headY := 90+ya*5
+AimX := AimPixelX - ZeroX +headX
+AimY := AimPixelY - ZeroY +headY
 If ( AimX+4 > 0) {
 DirX := rx / 10
 moveToRight := 1
