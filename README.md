@@ -1,4 +1,4 @@
-#Overkill aimming assitant
+#Overkill aiming assistant
 
 ##Intro
 This is a autoHotKey script for the online game OverWatch. It can auto-aim the adversaries when their HP bars appear.  To run the script, you should set your hero to default profile (i.e., default mouse sensitive).
