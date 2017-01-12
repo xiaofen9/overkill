@@ -6,6 +6,10 @@ This script works well for Soldier 76, Tracer, Bastion and Reaper.
 
 Instructions are included in How-to. Since overkill performs differently on different hardwares, you may well need to adjust some parameters before it can be "overkill". Please read the instructions before using the script!
 
+Overkill need to be donated for buying for accounts in various servers in order to support as many as possible users. If you like our script. Please donate some money to this project via alipay (Scan the following barcode using Alipay app in your phone).
+
+
+![](./alipay.png)
 
 ##History
 * V1.3beta: In this version, we try to overcome the range problem of aimbot. To be precious, V1.3b shoot the head of the adversary no matter he is far or close. Note that it is only an unstable version.
@@ -22,7 +26,6 @@ Star me to receive the newest Overkill! :}
 
 If there is any bug, you can submit an issue to inform me.
 
-Overkill need to be supported for buying for accounts in various servers. If you like our script. Please donate to this project.
-![](./alipay.png)
+
 
 
