@@ -8,18 +8,21 @@ Instructions are included in How-to. Since overkill performs differently on diff
 
 
 ##History
+* V1.3beta: In this version, we try to overcome the range problem of aimbot. To be precious, V1.3b shoot the head of the adversary no matter he is far or close. Note that it is only an unstable version.
 * V1.2: Using pixel-level search, hence HP bar searching is faster and more accurate! Thank Ding for his contribution!
 * V1.1: The searching scope of bars gets more accurate. Thus, HP bars searching is faster.
 * V1.0: The first version of Overkill, congratulations!
 
 
 ##Call For Contribution
-This script can't support different heros very well (e.g., Macree, Pharah, Widowmaker). You can contribute your aimming solution to be a part of this project. 
+This script can't support different heroes very well (e.g., Macree, Pharah, Widowmaker). You can contribute your aiming solution to be a part of this project. 
 
 ##Attention
-Star me to recieve the newest Overkill! :}
+Star me to receive the newest Overkill! :}
 
 If there is any bug, you can submit an issue to inform me.
 
+Overkill need to be supported for buying for accounts in various servers. If you like our script. Please donate to this project.
+![](./alipay.png)
 
 
