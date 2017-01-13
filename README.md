@@ -27,9 +27,6 @@ Star me to receive the newest Overkill! :}
 
 If there is any bug, you can submit an issue to inform me.
 
-Here is a demo about Overkill.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XgZ_5z_CUpQ" frameborder="0" allowfullscreen></iframe>
 
 
 
