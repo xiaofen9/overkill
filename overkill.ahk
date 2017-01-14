@@ -48,7 +48,7 @@ Firing := 0
 Gui Add, Text, x220 y25 w130 h30, 1280x720 Mode [F1]
 Gui Add, Text, x220 y45 w110 h30, 1920x1080 Mode [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
-Gui Add, Text, x220 y85 w110 h30, Pause/Resume [ALT]
+Gui Add, Text, x220 y85 w110 h30, Pause/Resume [CAPSLOCK]
 
 
 Gui Add, GroupBox, x10 y120 w160 h45, Speed
