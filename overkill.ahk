@@ -323,12 +323,10 @@ SmallY2 := LargeY2 - 55
 ;parameters used for pixel search, ideal ColVn should be 0, meaning that EMCol is the exact color of health bar
 EMCol := 0xFF0013
 ColVn := 1
-BodyVariation := 60
-BodyCol := 0xFF0013
 FoundFlag :=false
 
 if(overlayActive=1){
-Box_Init("00FF00")
+Box_Init("FF0000")
 Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
 }
 
@@ -338,20 +336,10 @@ Gui,Submit, Nohide
 GoSub SearchBot
 GetKeyState, Mouse2, LButton, P
 if ( Mouse2 == "D" ) {
-if (FoundBody = true)
-{
-	GoSub GetAimOffsetBody
-	GoSub GetAimMovesBody
-	GoSub MouseMoves1
-}
-else
-{
-	GoSub GetAimOffset1
-	GoSub GetAimMoves1
-	GoSub MouseMoves1
-}
 
-
+GoSub GetAimOffset1
+GoSub GetAimMoves1
+GoSub MouseMoves1
 
 }
 }
@@ -373,49 +361,19 @@ DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 
 
 SearchBot:
-ToolTip, %FoundFlag% | %FoundBody% | %AimPixelY% | %AimPixelYBody% 
-;MouseGetPos, MX, MY
-;ToolTip, %LargeX1% | %LargeY1% | %LargeX2% | %LargeY2% | %MX% | %MY%
-FoundBody := false
-;if ( not FoundFlag ) {
+if ( not FoundFlag ) {
 	PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
-	if (ErrorLevel = 0) 
-	{
-		FoundFlag := true
-		;tmpAimPixelX = AimPixelX 
-		;tmpAimPixelY = AimPixelY+20
-		PixelSearch, AimPixelXBody, AimPixelYBody, AimPixelX, AimPixelY+30, LargeX2, LargeY2, BodyCol, BodyVariation, Fast RGB
-		if ErrorLevel = 0
-			FoundBody := true
-		else
-			FoundBody := false
-	}
-	else 
-	{
+	if ErrorLevel = 1  
 		FoundFlag := false
-	}
-;}
-;else {
-;	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
-;	if (ErrorLevel = 0)
-;	{
-;		;tmpAimPixelX = AimPixelX 
-;		;tmpAimPixelY = AimPixelY+20
-;		PixelSearch, AimPixelXBody, AimPixelYBody, AimPixelX, AimPixelY+35, SmallX2, SmallY2, BodyCol, BodyVariation, Fast RGB
-;		if ErrorLevel = 0
-;		{
-;			FoundBody := true
-;		}
-;		else
-;		{
-;			FoundBody := false
-;		}
-;	}
-;	else
-;	{
-;		FoundFlag := false
-;	}
-;}
+	else 
+		FoundFlag := true
+}
+else {
+	PixelSearch, AimPixelX, AimPixelY, SmallX1, SmallY1, SmallX2, SmallY2, EMCol, ColVn, Fast RGB
+	;PixelSearch, AimPixelX, AimPixelY, LargeX1, LargeY1, LargeX2, LargeY2, EMCol, ColVn, Fast RGB
+	if ErrorLevel = 1
+		FoundFlag := false		
+}
 Return
 
 
@@ -424,7 +382,7 @@ GetAimOffset1:
 Gui,Submit, Nohide
 moveToRight := 0
 headX := 42+xa*3
-headY := 85+ya*5
+headY := 90+ya*5
 AimX := AimPixelX - ZeroX +headX
 AimY := AimPixelY - ZeroY +headY
 If ( AimX+4 > 0) {
@@ -443,30 +401,6 @@ DirY := (-rx) /10
 AimOffsetX := AimX * DirX
 AimOffsetY := AimY * DirY
 Return
-
-
-GetAimOffsetBody:
-Gui,Submit, Nohide
-
-AimX := AimPixelXBody - ZeroX
-AimY := AimPixelYBody - ZeroY + 5 
-If ( AimX+4 > 0) {
-DirX := rx / 10
-}
-If ( AimX+4 < 0) {
-DirX := (-rx) / 10
-}
-If ( AimY+2 > 0 ) {
-DirY := rX /10 
-}
-If ( AimY+2 < 0 ) {
-DirY := (-rx) /10 
-}
-AimOffsetX := AimX * DirX
-AimOffsetY := AimY * DirY
-Return
-
-
 
 GetAimMoves1:
 ;RootX := Ceil(AimOffsetX)
@@ -487,13 +421,8 @@ MoveY := RootY * DirY
 ;GoSub DebugTool1
 Return
 
-GetAimMovesBody:
-RootX := AimOffsetX
-RootY := AimOffsetY
-MoveX := RootX * DirX
-MoveY := RootY * DirY
-;GoSub DebugTool1
-Return
+
+
 
 
 reload:
