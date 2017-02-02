@@ -48,13 +48,13 @@ Firing := 0
 Gui Add, Text, x220 y25 w130 h30, 1280x720 Mode [F1]
 Gui Add, Text, x220 y45 w110 h30, 1920x1080 Mode [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
-Gui Add, Text, x220 y85 w110 h30, Pause/Resume [CAPSLOCK]
+Gui Add, Text, x220 y85 w110 h30, Pause/Resume [F4]
 
 
 Gui Add, GroupBox, x10 y120 w160 h45, Speed
 Gui Add, GroupBox, x10 y10 w180 h100, Intro
 Gui Add, Text, x20 y30 w165 h25, Overkill aimming assitant
-Gui Add, Text, x20 y55 w165 h25, Active when fire
+Gui Add, Text, x20 y55 w165 h25, Active when Capslock were pressed
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
@@ -90,9 +90,7 @@ Sleep -1
 }
 Return
 
-F4::
-Send {Ctrl Down}{Shift Down}{R Down}{Ctrl Up}{Shift Up}{R Up}
-Return
+
 #If bunny=1
 *~$Space::
 sleep 20
@@ -195,7 +193,7 @@ Loop, {
 Gui,Submit, Nohide
 
 GoSub SearchBot
-GetKeyState, Mouse2, LButton, P
+GetKeyState, Mouse2, CapsLock, P
 if ( Mouse2 == "D" ) {
 
 GoSub GetAimOffset
@@ -334,7 +332,7 @@ Loop, {
 Gui,Submit, Nohide
 
 GoSub SearchBot
-GetKeyState, Mouse2, LButton, P
+GetKeyState, Mouse2, CapsLock, P
 if ( Mouse2 == "D" ) {
 
 GoSub GetAimOffset1
@@ -444,10 +442,11 @@ MouseGetPos, MX, MY
 ToolTip, %xa% | %xy%
 Return
 
-~capslock::
+~F4::
 pause
 SoundBEEP
 return
+
 F3::
 Reload
 Return
