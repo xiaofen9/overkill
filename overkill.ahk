@@ -63,16 +63,9 @@ Gui Add, Button, x230 y210 w100 h20 gsub1, How-to
 Gui Add, Button, x230 y240 w100 h20 gsub2, Get lastest ver
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
 Gui Add, CheckBox, x16 y288 w160 h20 voverlayActive, Overlay
-;Gui Add, CheckBox, x16 y288 w160 h20 vmccree, Mccree Right Click No Recoil
-;Gui Add, CheckBox, x16 y308 w160 h20 vtorbjorn, Torbjorn Fast Reload
-;Gui Add, CheckBox, x16 y328 w160 h20 vpharah, Pharah Fast Reload
 Gui Add, CheckBox, x16 y328 w160 h20 vreaper, Reaper Fast Reload
 Gui Add, Text, x16 y428 w160 h20, LtoRaddendOffset:
 Gui Add, Edit, x16 y448 w160 h20 vLtoRaddendOffset, 1.2
-;Gui Add, CheckBox, x16 y368 w160 h20 vroadhog, RoadHog Fast Reload
-;Gui Add, CheckBox, x16 y388 w160 h20 vroadhog1, RoadHog Combo
-;Gui Add, CheckBox, x16 y408 w160 h20 vgenji, Genji combo
-;Gui Add, CheckBox, x16 y288 w160 h20 vbunny, Bunnyhop
 Gui Add, Text, x16 y200 w33 h20, x-axis:
 Gui Add, Slider,x48 y200 w130 h25 vxrange Invert Tickinterval1 range1-4, 4
 Gui Add, Text, x16 y224 w35 h19, y-axis:
@@ -183,7 +176,7 @@ SmallY2 := LargeY2 - 55
 EMCol := 0xFF0013
 ColVn := 2
 FoundFlag :=false
-
+Cnt:=0
 if(overlayActive=1){
 Box_Init("FF0000")
 Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
@@ -193,13 +186,16 @@ Loop, {
 Gui,Submit, Nohide
 
 GoSub SearchBot
-GetKeyState, Mouse2, CapsLock, P
-if ( Mouse2 == "D" ) {
+GetKeyState, CapLck, CapsLock, P
+if ( CapLck == "D" ) {
+Cnt:=150000
+}
 
+while(Cnt>=0){
 GoSub GetAimOffset
 GoSub GetAimMoves
 GoSub MouseMoves
-
+Cnt--
 }
 
 
@@ -208,16 +204,13 @@ GoSub MouseMoves
 }
 
 MouseMoves:
-If ( Mouse2 == "D" ) {
+GetKeyState, Mouse1, LButton, P
+If ( Mouse1 == "D" ) {
 DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 }
 Return
 
-;MouseMoves1:
-;If ( Mouse2 == "U" ) {
-;DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
-;}
-;Return
+
 
 GetAimOffset:
 Gui,Submit, Nohide
@@ -322,7 +315,7 @@ SmallY2 := LargeY2 - 55
 EMCol := 0xFF0013
 ColVn := 1
 FoundFlag :=false
-
+Cnt:=0
 if(overlayActive=1){
 Box_Init("FF0000")
 Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
@@ -332,15 +325,19 @@ Loop, {
 Gui,Submit, Nohide
 
 GoSub SearchBot
-GetKeyState, Mouse2, CapsLock, P
-if ( Mouse2 == "D" ) {
+GetKeyState, CapLck, CapsLock, P
+if ( CapLck == "D" ) {
+Cnt:=150000
+}
 
+while(Cnt>=0){
 GoSub GetAimOffset1
 GoSub GetAimMoves1
 GoSub MouseMoves1
+Cnt--
+}
+}
 
-}
-}
 
 
 
@@ -348,13 +345,11 @@ GoSub MouseMoves1
 
 
 MouseMoves1:
-DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
-Return
-
-MouseMoves11:
-If ( Mouse2 == "U" ) {
+GetKeyState, Mouse1, LButton, P
+If ( Mouse1 == "D" ) {
 DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 }
+Return
 
 
 
