@@ -8,10 +8,10 @@ This script works well for Soldier 76, Tracer, Bastion and Reaper.
 
 Instructions are included in How-to. Since overkill performs differently on different hardwares, you may well need to adjust some parameters before it can be "overkill". Please read the instructions before using the script!
 
-Overkill need to be donated for buying more accounts in various servers in order to support as many as possible users. If you like our script. Please donate some money to this project. 
+
 
 ##History
-* V1.3: In this version, We set the aim hotkey from Lbutton of mouse to Capslock. Now you can fire freely without overkill and activate Overkill when capslock were pressed. Then aimbot will be valid for about 2 seconds. During that time, overkill will work as long as you fire.
+* V1.3: ***In this version, We set the aim hotkey from Lbutton of mouse to Capslock. Now you can fire freely without overkill and activate Overkill when capslock were pressed. Then aimbot will be valid for about 2 seconds. During that time, overkill will work as long as you fire.***
 * V1.2: Using pixel-level search, hence HP bar searching is faster and more accurate! Thank Ding for his contribution!
 * V1.1: The searching scope of bars gets more accurate. Thus, HP bars searching is faster.
 * V1.0: The first version of Overkill, congratulations!

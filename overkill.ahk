@@ -185,13 +185,14 @@ Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
 Loop, {
 Gui,Submit, Nohide
 
-GoSub SearchBot
+
 GetKeyState, CapLck, CapsLock, P
 if ( CapLck == "D" ) {
 Cnt:=150000
 }
 
 while(Cnt>=0){
+GoSub SearchBot
 GoSub GetAimOffset
 GoSub GetAimMoves
 GoSub MouseMoves
@@ -324,13 +325,14 @@ Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
 Loop, {
 Gui,Submit, Nohide
 
-GoSub SearchBot
+
 GetKeyState, CapLck, CapsLock, P
 if ( CapLck == "D" ) {
 Cnt:=150000
 }
 
 while(Cnt>=0){
+GoSub SearchBot
 GoSub GetAimOffset1
 GoSub GetAimMoves1
 GoSub MouseMoves1
