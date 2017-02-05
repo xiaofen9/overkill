@@ -45,8 +45,8 @@ guif:
 #SingleInstance force
 SkinForm(Apply, A_ScriptDir . "\USkin.dll", A_ScriptDir . "\Milikymac.msstyles")
 Firing := 0
-Gui Add, Text, x220 y25 w130 h30, 1280x720 Mode [F1]
-Gui Add, Text, x220 y45 w110 h30, 1920x1080 Mode [F2]
+Gui Add, Text, x220 y25 w130 h30, Small Screen [F1]
+Gui Add, Text, x220 y45 w110 h30, Large Screen [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
 Gui Add, Text, x220 y85 w110 h30, Pause/Resume [F4]
 
@@ -103,7 +103,7 @@ Return
 
 sub1:
 {
-msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nResolution has to be 720p or 1080p. As precaution, set your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your resolution.`nShoot an Enemy. When the Health Bar is visible, overkill will start to auto-aimming.`n`n Speed: represent the moving speed of auto-aimming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
+msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nSet your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your screen size. If you are not sure, just try them both. `nShoot an Enemy. When the Health Bar is visible, overkill will start to auto-aiming for about 1s when capslock is pressed.`n`n Speed: represent the moving speed of auto-aiming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
 }
 return
 
@@ -188,7 +188,7 @@ Gui,Submit, Nohide
 
 GetKeyState, CapLck, CapsLock, P
 if ( CapLck == "D" ) {
-Cnt:=150000
+Cnt:=60
 }
 
 while(Cnt>=0){
@@ -328,7 +328,7 @@ Gui,Submit, Nohide
 
 GetKeyState, CapLck, CapsLock, P
 if ( CapLck == "D" ) {
-Cnt:=150000
+Cnt:=65
 }
 
 while(Cnt>=0){
