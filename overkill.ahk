@@ -1,4 +1,4 @@
-; <COMPILER: v1.1.24.01>
+﻿; <COMPILER: v1.1.24.01>
 Box_Init(C="FF0000") {
 Gui, 96: -Caption +ToolWindow +E0x20
 Gui, 96: Color, % C
@@ -53,12 +53,14 @@ Gui Add, Text, x220 y85 w110 h30, Pause/Resume [F4]
 
 Gui Add, GroupBox, x10 y120 w160 h45, Speed
 Gui Add, GroupBox, x10 y10 w180 h100, Intro
-Gui Add, Text, x20 y30 w165 h25, Overkill aimming assitant
-Gui Add, Text, x20 y55 w165 h25, Active when Capslock were pressed
+Gui Add, Text, x20 y30 w165 h25, Sakura 
+Gui Add, Text, x20 y55 w165 h25, Active when Mouse were pressed
+
+GoSub getProfile
 
 
 Gui Add, Text, x40 y144 w35 h20, rx:
-Gui Add, Edit, x80 y140 w50 h20 vrx, 5
+Gui Add, Edit, x80 y140 w50 h20 vrx, %pfrx%
 Gui Add, Button, x230 y210 w100 h20 gsub1, How-to
 Gui Add, Button, x230 y240 w100 h20 gsub2, Get lastest ver
 Gui Add, GroupBox, x8 y265 w187 h210, Misc
@@ -70,13 +72,13 @@ Gui Add, Text, x16 y200 w33 h20, x-axis:
 Gui Add, Slider,x48 y200 w130 h25 vxrange Invert Tickinterval1 range1-4, 4
 Gui Add, Text, x16 y224 w35 h19, y-axis:
 Gui Add, Slider,x48 y224 w130 h25 vyrange Invert Tickinterval1 range1-4, 4
-Gui Add, Edit, x315 y140 w30 h20 vya, 0
+Gui Add, Edit, x315 y140 w30 h20 vya, %pfya%
 Gui Add, Text, x280 y140 w35 h20, Y:
 Gui Add, Text, x208 y140 w35 h20, X:
-Gui Add, Edit, x240 y140 w35 h20 vxa, 0
+Gui Add, Edit, x240 y140 w35 h20 vxa, %pfxa%
 Gui Add, GroupBox, x205 y120 w160 h45, Shoot 
 Gui Add, Text, x220 y300 w130 h150, `n`nThe software is just for fun`n`nYou should only use it for legal propose`n`n
-Gui Show, w372 h480, Overkill
+Gui Show, w372 h480, Sakura
 Loop {
 Gui, Submit, NoHide
 Sleep -1
@@ -103,7 +105,7 @@ Return
 
 sub1:
 {
-msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nSet your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your screen size. If you are not sure, just try them both. `nShoot an Enemy. When the Health Bar is visible, overkill will start to auto-aiming for about 1s when capslock is pressed.`n`n Speed: represent the moving speed of auto-aiming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
+msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nSet your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your screen size. If you are not sure, just try them both. `nShoot an Enemy. When the Health Bar is visible, Sakura will start to auto-aiming for about 1s when capslock is pressed.`n`n Speed: represent the moving speed of auto-aiming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
 }
 return
 
@@ -162,6 +164,9 @@ GuiControlget, ya
 GuiControlget, xrange
 GuiControlget, yrange
 
+;save profile
+GoSub saveProfile
+
 ;detection box
 LargeX1 := 0 + (A_Screenwidth * (xrange/10))
 LargeY1 := 0 + (A_Screenheight * (yrange/10))-40
@@ -176,7 +181,7 @@ SmallY2 := LargeY2 - 55
 EMCol := 0xFF0013
 ColVn := 2
 FoundFlag :=false
-Cnt:=0
+
 if(overlayActive=1){
 Box_Init("FF0000")
 Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
@@ -185,18 +190,14 @@ Box_Draw(LargeX1, LargeY1 , LargeX2-LargeX1, LargeY2-LargeY1)
 Loop, {
 Gui,Submit, Nohide
 
-
-GetKeyState, CapLck, CapsLock, P
-if ( CapLck == "D" ) {
-Cnt:=60
-}
-
-while(Cnt>=0){
 GoSub SearchBot
+GetKeyState, Mouse2, LButton, P
+if ( Mouse2 == "D" ) {
+
 GoSub GetAimOffset
 GoSub GetAimMoves
 GoSub MouseMoves
-Cnt--
+
 }
 
 
@@ -205,8 +206,7 @@ Cnt--
 }
 
 MouseMoves:
-GetKeyState, Mouse1, LButton, P
-If ( Mouse1 == "D" ) {
+If ( Mouse2 == "D" ) {
 DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
 }
 Return
@@ -295,11 +295,14 @@ ScanT := 280
 ScanB := 610
 
 ;UI parameters
-GuiControlget, rX
+GuiControlget, rx
 GuiControlget, xa
 GuiControlget, ya
 GuiControlget, xrange
 GuiControlget, yrange
+
+;save profile
+GoSub saveProfile
 
 ;detection box
 LargeX1 := 0 + (A_Screenwidth * (xrange/10))
@@ -326,31 +329,22 @@ Loop, {
 Gui,Submit, Nohide
 
 
-GetKeyState, CapLck, CapsLock, P
-if ( CapLck == "D" ) {
-Cnt:=65
-}
-
-while(Cnt>=0){
 GoSub SearchBot
+GetKeyState, Mouse2, LButton, P
+if ( Mouse2 == "D" ) {
+
 GoSub GetAimOffset1
 GoSub GetAimMoves1
 GoSub MouseMoves1
-Cnt--
+
 }
 }
-
-
-
 
 
 
 
 MouseMoves1:
-GetKeyState, Mouse1, LButton, P
-If ( Mouse1 == "D" ) {
 DllCall("mouse_event", uint, 1, int, MoveX, int, MoveY, uint, 0, int, 0)
-}
 Return
 
 
@@ -417,6 +411,63 @@ MoveY := RootY * DirY
 Return
 
 
+getProfile:
+file := FileOpen("overkill.conf", "r")
+if !IsObject(file)
+{	
+	pfrx := 5
+	pfxa := 0
+	pfya := 0
+	return
+}
+i := 0
+Loop, 3
+{	i := i+1
+    Line := file.ReadLine()
+	if(i==1)
+	{
+	pfxa:=Line
+	}
+	if(i==2)
+	{
+	pfya := Line
+	}
+	if(i==3)
+	{
+	pfrx := Line
+	}
+}
+file.Close()
+return
+
+saveProfile:
+FileDelete,overkill.conf
+file := FileOpen("overkill.conf", "w")
+if !IsObject(file)
+{
+	return
+}
+i:=0
+AutoTrim, On
+Loop, 3
+{	i:=i+1
+	if(i==1)
+	{
+	Line:=xa
+	}
+	if(i==2)
+	{
+	Line:=ya
+	}
+	if(i==3)
+	{
+	Line:=rx
+	}
+	MsgBox ,%Line%
+	file.Write(Line)
+}
+file.Close()
+return
 
 
 
@@ -439,7 +490,7 @@ MouseGetPos, MX, MY
 ToolTip, %xa% | %xy%
 Return
 
-~F4::
+~capslock::
 pause
 SoundBEEP
 return
