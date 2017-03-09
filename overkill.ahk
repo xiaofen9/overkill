@@ -53,7 +53,7 @@ Gui Add, Text, x220 y85 w110 h30, Pause/Resume [F4]
 
 Gui Add, GroupBox, x10 y120 w160 h45, Speed
 Gui Add, GroupBox, x10 y10 w180 h100, Intro
-Gui Add, Text, x20 y30 w165 h25, Sakura 
+Gui Add, Text, x20 y30 w165 h25, Overkill v1.4 
 Gui Add, Text, x20 y55 w165 h25, Active when Mouse were pressed
 
 GoSub getProfile
@@ -78,7 +78,7 @@ Gui Add, Text, x208 y140 w35 h20, X:
 Gui Add, Edit, x240 y140 w35 h20 vxa, %pfxa%
 Gui Add, GroupBox, x205 y120 w160 h45, Shoot 
 Gui Add, Text, x220 y300 w130 h150, `n`nThe software is just for fun`n`nYou should only use it for legal propose`n`n
-Gui Show, w372 h480, Sakura
+Gui Show, w372 h480, Overkill v1.4
 Loop {
 Gui, Submit, NoHide
 Sleep -1
@@ -105,7 +105,7 @@ Return
 
 sub1:
 {
-msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nSet your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your screen size. If you are not sure, just try them both. `nShoot an Enemy. When the Health Bar is visible, Sakura will start to auto-aiming for about 1s when capslock is pressed.`n`n Speed: represent the moving speed of auto-aiming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
+msgbox, How-to:`n`nLaunch Game. Set display mode to Borderless Windowed mode in Settings.`nSet your quality settings to Low.`n`nTo-use:`nPress F1 or F2 depending on your screen size. If you are not sure, just try them both. `nShoot an Enemy. When the Health Bar is visible, Overkill v1.4 will start to auto-aiming for about 1s when capslock is pressed.`n`n Speed: represent the moving speed of auto-aiming. If your mouse shakes badly, you should turn it down, otherwise you should turn it up.`n`n Shoot: represent the offset of the final aimming point. If you think this point on the left of the adversaries' head, increase X. If you think this point is higher than the adversaries' head, increase Y. `n`n Misc: Just explore it.
 }
 return
 
