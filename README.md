@@ -1,8 +1,9 @@
-#Overkill aiming assistant
+# Overkill aiming assistant
+
 ## 国人福利
 由于开发小组来自中国，所以我们决定推出一个中文说明并放在最后面。
 
-##Intro
+## Intro
 This is a autoHotKey script for the online game OverWatch. It can auto-aim the adversaries when their HP bars appear.  To run the script, you should set your hero to default profile (i.e., default mouse sensitive). In addition to that, you ought to set your picture rendering to low and set  gamma brightness settings to default. 
 This script works well for Soldier 76, Tracer, Bastion and Reaper.
 
@@ -10,7 +11,7 @@ Instructions are included in How-to. Since overkill performs differently on diff
 
 Note! It is welcomed that you repost overkill at any other forums and platforms, but please attach the original link (i.e., https://github.com/xiaofen9/overwatch)  
 
-##History
+## History
 
 **V2.0** : We release our new Overkill with proudness! We investigate many fancy functions and made many improvements. Thanks for contribution from contributors!
 We mainly improve following aspects:
@@ -33,7 +34,7 @@ We mainly improve following aspects:
  **V1.0**: The first version of Overkill, congratulations!
 
 
-##Call For Contribution
+## Call For Contribution
 This script can't support different heroes very well (e.g., Macree, Pharah, Widowmaker). You can contribute your aiming solution to be a part of this project. 
 
 
