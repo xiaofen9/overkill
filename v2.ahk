@@ -258,8 +258,8 @@ Class OverWatch
 
 	Calc(x, y, headX, headY)
 	{
-		x := Floor( (x - A_ScreenWidth/2 + headX) * this.offset) )
-		y := Floor( (y - A_ScreenHeight/2 + headY) * this.offset) )
+		x := Floor( (x - A_ScreenWidth/2 + headX) * this.offset) 
+		y := Floor( (y - A_ScreenHeight/2 + headY) * this.offset) 
 
 		this.MouseMove(x, y)
 	}
