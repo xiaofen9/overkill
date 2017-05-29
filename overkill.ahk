@@ -6,7 +6,7 @@ ListLines, Off
 SetBatchLines, -1
 CoordMode, Pixel, Screen
 
-verHash := 2.0
+verHash := 2.0.1
 Gui Add, Text, x220 y25 w130 h30, Start [F1]
 ; Gui Add, Text, x220 y45 w110 h30, Large Screen [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
@@ -85,18 +85,19 @@ GoSub saveProfile
 
 if(overlayActive=1){
 Box_Init("FF0000")
-Box_Draw((A_ScreenWidth)/2 - (A_ScreenWidth)/5, (A_ScreenHeight)/2 - (A_ScreenHeight)/4
-	, 2 * (A_ScreenWidth)/5, 2 * (A_ScreenHeight)/4)
+Box_Draw((A_ScreenWidth)/2 - headX-15, (A_ScreenHeight)/2 - headY-30
+	, 20, 40)
 }
 
-Init := new OverWatch(rx)
+Init := new OverWatch(rx,headX,headY)
 
 Loop
 {
 	If ( Init.Firing("LButton") )
-	{
-		Pos := Init.Search()
-		Init.Calc(Pos.X, Pos.Y, headX, headY)
+	{	
+			Pos := Init.Search()
+			Init.Calc(Pos.X, Pos.Y)
+
 	}
 }
 Return
@@ -254,12 +255,12 @@ Gui, % A_Index + 95 ":  Hide"
 
 Class OverWatch
 {
-	__New(rx)
+	__New(rx,headX,headY)
 	{
 		this.rx := rx
 		this.offset := rx / 10
-		this.middleX := (A_ScreenWidth)/2
-		this.middleY := (A_ScreenHeight)/2
+		this.headX := headX
+		this.headY := headY
 	}
 
 	Firing(Key)
@@ -269,10 +270,10 @@ Class OverWatch
 
 	Search()
 	{
-		Static X1 := (A_ScreenWidth)/2 - (A_ScreenWidth)/5
-		, Y1 := (A_ScreenHeight)/2 - (A_ScreenHeight)/4
-		, X2 := (A_ScreenWidth)/2 + (A_ScreenWidth)/5
-		, Y2 := (A_ScreenHeight)/2 + (A_ScreenHeight)/4
+		Static X1 := (A_ScreenWidth)/2 - (A_ScreenWidth)/7
+		, Y1 := (A_ScreenHeight)/2 - (A_ScreenHeight)/5
+		, X2 := (A_ScreenWidth)/2 + (A_ScreenWidth)/7
+		, Y2 := (A_ScreenHeight)/2 + (A_ScreenHeight)/7
 		, ColorID := 0xFF0013, ColorVariation := 0
 
 		Loop
@@ -283,25 +284,38 @@ Class OverWatch
 		Return {x: OutputVarX, y: OutputVarY}
 	}
 
-	Calc(x, y, headX, headY)
-	{
-		x := Floor( (x - A_ScreenWidth/2 + headX) * this.offset) 
-		y := Floor( (y - A_ScreenHeight/2 + headY) * this.offset) 
-		if(this.AntiShake(headX,headY))
+	Calc(x, y)
+	{	If ( this.AntiShake(x) )
 		{
+			x := Floor( (x - A_ScreenWidth/2 + this.headX) * this.offset) 
+			y := Floor( (y - A_ScreenHeight/2 + this.headY) * this.offset) 
 			this.MouseMove(x, y)
 		}
 	}
 
-	AntiShake(headX,headY)
+
+
+	AntiShake(x)
 	{
-		barX := this.middleX-headX
-		barY := this.middleY-headY
-		PixelSearch, OutputVarX, OutputVarY, barX-20, barY-15, barX+15, barY+15, 0xFF0013, 0, Fast RGB
+		If ( this.findBar() )
+		{
+			If ( Abs(x - A_ScreenWidth/2 + this.headX)> 60)
+			{
+				Return false
+			}
+		}
+		Return true
+	}
+
+	findBar()
+	{
+		barX := (A_ScreenWidth)/2-this.headX
+		barY := (A_ScreenHeight)/2-this.headY
+		PixelSearch, OutputVarX, OutputVarY, barX-15, barY-30, barX+5, barY+15, 0xFF0013, 0, Fast RGB
 		if ErrorLevel
-   			Return true
+   			Return false
 		else
-    		Return false
+    		Return true
 	}
 	
 

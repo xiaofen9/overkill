@@ -10,6 +10,14 @@ Instructions are included in How-to. Since overkill performs differently on diff
 
 Note! It is welcomed that you repost overkill at any other forums and platforms, but please attach the original link (i.e., https://github.com/xiaofen9/overwatch)  
 
+
+## Support poor kids
+Overkill is a open-source free software, now Overkill wants to help support a school for children in Ghana.  We promise that every sponsorship we receive will be donated in the name of Overkill. We wish you can donate $10 to the [Patreon Project](https://www.patreon.com/overkillandkid).
+
+[Donate on Patreon](https://www.patreon.com/overkillandkid) (Monthly  payment, you can cancel at any time)
+
+
+
 ## History
 
 **V2.0** : We release our new Overkill with proudness! We investigate many fancy functions and made many improvements. Thanks for contribution from contributors!
@@ -33,8 +41,11 @@ We mainly improve following aspects:
  **V1.0**: The first version of Overkill, congratulations!
 
 
-## Call For Contribution
-This script can't support different heroes very well (e.g., Macree, Pharah, Widowmaker). You can contribute your aiming solution to be a part of this project. 
+
+
+
+
+
 
 
 
