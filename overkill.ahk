@@ -6,7 +6,7 @@ ListLines, Off
 SetBatchLines, -1
 CoordMode, Pixel, Screen
 
-verHash := 2.0.1
+verHash := "2.0.1"
 Gui Add, Text, x220 y25 w130 h30, Start [F1]
 ; Gui Add, Text, x220 y45 w110 h30, Large Screen [F2]
 Gui Add, Text, x220 y65 w160 h30, Restart Program [F3]
