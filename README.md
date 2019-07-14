@@ -8,13 +8,7 @@ This script works well for Soldier 76, Tracer, Bastion and Reaper.
 
 Instructions are included in How-to. Since overkill performs differently on different hardwares, you may well need to adjust some parameters before it can be "overkill". Please ***peruse*** the instructions before using the script!
 
-Note! It is welcomed that you repost overkill at any other forums and platforms, but please attach the original link (i.e., https://github.com/xiaofen9/overwatch)  
-
-
-## Support poor kids
-Overkill is a open-source free software, now Overkill wants to help support a school for children in Ghana.  We promise that every sponsorship we receive will be donated in the name of Overkill. We wish you can donate $10 to the [Patreon Project](https://www.patreon.com/overkillandkid).
-
-[Donate on Patreon](https://www.patreon.com/overkillandkid) (Monthly  payment, you can cancel at any time)
+Note! It is welcomed that you repost overkill at any other forums and platforms, but please attach the original link (i.e., https://github.com/xiaofen9/overkill)  
 
 
 
